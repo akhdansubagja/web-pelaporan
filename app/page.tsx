@@ -1,65 +1,93 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+
+const MapPublic = dynamic(() => import('@/components/MapPublic'), {
+  ssr: false,
+  loading: () => (
+    <div className="h-[500px] w-full bg-gray-200 animate-pulse rounded-xl flex items-center justify-center">
+      Memuat Peta Desa...
+    </div>
+  )
+});
+
+export default function LandingPage() {
+  const [laporanApproved, setLaporanApproved] = useState([]);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null); // State untuk Pop-up
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await fetch('/api/laporan'); 
+        const result = await res.json();
+        if (result.success) setLaporanApproved(result.data);
+      } catch (error) {
+        console.error('Gagal mengambil data:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <div className="min-h-screen bg-gray-50">
+      
+      {/* Modal Pop-up Foto untuk Publik */}
+      {selectedImage && (
+        <div 
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-80 p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <div className="relative max-w-4xl max-h-[90vh]">
+            <button 
+              onClick={() => setSelectedImage(null)}
+              className="absolute -top-10 right-0 text-white text-4xl font-bold hover:text-gray-300"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+              &times;
+            </button>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src={selectedImage} 
+              alt="Foto Diperbesar" 
+              className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Hero Section */}
+      <header className="bg-green-700 text-white py-16 px-4 text-center">
+        <h1 className="text-4xl md:text-5xl font-extrabold mb-4">
+          Peta Sampah Desa Mulyajaya
+        </h1>
+        <p className="text-lg md:text-xl max-w-2xl mx-auto text-green-100 mb-8">
+          Sistem pelaporan tumpukan sampah berbasis kerumunan (WebGIS) untuk menjaga kebersihan dan kelestarian lingkungan.
+        </p>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link href="/lapor" className="bg-white text-green-700 px-8 py-3 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">
+            Lapor Tumpukan Sampah
+          </Link>
+          <Link href="/admin" className="bg-green-600 border border-green-500 text-white px-8 py-3 rounded-full font-bold hover:bg-green-800 transition">
+            Login Admin
+          </Link>
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="max-w-5xl mx-auto p-4 py-12">
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-800">Titik Pantau Terkini</h2>
+          <p className="text-gray-600 mt-1">
+            Terdapat <span className="font-bold text-red-600">{laporanApproved.length}</span> titik sampah yang telah dikonfirmasi dan menunggu penanganan. Klik foto pada pin merah untuk memperbesar.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="shadow-xl rounded-xl border border-gray-200 bg-white p-2 relative z-0">
+          {/* Kirim fungsi setSelectedImage ke peta */}
+          <MapPublic laporanData={laporanApproved} onImageClick={setSelectedImage} />
         </div>
       </main>
     </div>
   );
-}
+} 
