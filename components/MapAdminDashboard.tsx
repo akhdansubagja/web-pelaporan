@@ -84,6 +84,7 @@ export default function MapAdminDashboard({
           isGpsFetched.current = true;
         },
         (err) => {
+          console.log("GPS ditolak. Menggunakan tengah desa Mulyajaya.");
           isGpsFetched.current = true;
         },
         { enableHighAccuracy: true }
@@ -113,7 +114,7 @@ export default function MapAdminDashboard({
         zoom={15}
         style={{ height: '100%', width: '100%', zIndex: 0 }}
       >
-        {isAdding && <ChangeView center={addingPos} />}
+        <ChangeView center={isAdding ? addingPos : position} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

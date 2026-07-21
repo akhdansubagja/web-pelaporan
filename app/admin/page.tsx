@@ -265,117 +265,118 @@ export default function AdminDashboard() {
   };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 py-8 relative">
-      
-      {/* Lightbox Pop-up Foto */}
-      {selectedImage && (
-        <div 
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-90 p-4"
-          onClick={() => setSelectedImage(null)}
-        >
-          <div className="relative max-w-5xl max-h-[90vh]">
-            <button 
-              onClick={() => setSelectedImage(null)}
-              className="absolute -top-12 right-0 text-white text-4xl font-bold hover:text-gray-300"
-            >
-              &times;
-            </button>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img 
-              src={selectedImage} 
-              alt="Foto Diperbesar" 
-              className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
-          </div>
-        </div>
-      )}
-
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-        <div>
-          <h1 className="text-3xl font-bold mb-2 text-gray-800">Admin WebGIS</h1>
-          <p className="text-gray-600">Map-centric dashboard untuk manajemen spasial yang interaktif.</p>
-        </div>
-        <button 
-          onClick={handleLogout}
-          className="bg-red-100 text-red-700 px-5 py-2 rounded-lg font-bold hover:bg-red-200 transition shadow-sm"
-        >
-          Logout
-        </button>
-      </div>
-      
-      {/* Container Utama */}
-      <div className="relative">
+    <div className="min-h-screen bg-green-50/50">
+      <div className="max-w-6xl mx-auto p-4 py-8 relative">
         
-        {/* Lapisan Filter (Floating di atas peta) */}
-        <div className="absolute top-4 left-4 z-[1000] bg-white/90 backdrop-blur p-4 rounded-xl shadow-lg border border-gray-200">
-          <h3 className="font-bold text-gray-800 mb-3 border-b pb-2">Filter Tampilan</h3>
-          <div className="flex flex-col gap-2">
-            <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-1 rounded">
-              <input type="checkbox" checked={filters.pending} onChange={() => handleFilterToggle('pending')} className="w-4 h-4 text-red-600 rounded" />
-              <div className="w-3 h-3 bg-red-500 rounded-full border border-gray-300"></div>
-              <span className="text-sm font-medium text-gray-700">Menunggu Validasi</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-1 rounded">
-              <input type="checkbox" checked={filters.approved} onChange={() => handleFilterToggle('approved')} className="w-4 h-4 text-orange-600 rounded" />
-              <div className="w-3 h-3 bg-orange-500 rounded-full border border-gray-300"></div>
-              <span className="text-sm font-medium text-gray-700">Aktif (Peta Publik)</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-1 rounded">
-              <input type="checkbox" checked={filters.resolved} onChange={() => handleFilterToggle('resolved')} className="w-4 h-4 text-green-600 rounded" />
-              <div className="w-3 h-3 bg-green-500 rounded-full border border-gray-300"></div>
-              <span className="text-sm font-medium text-gray-700">Telah Dibersihkan</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer hover:bg-gray-100 p-1 rounded">
-              <input type="checkbox" checked={filters.landmarks} onChange={() => handleFilterToggle('landmarks')} className="w-4 h-4 text-blue-600 rounded" />
-              <div className="w-3 h-3 bg-blue-500 rounded-full border border-gray-300"></div>
-              <span className="text-sm font-medium text-gray-700">Patokan Lokasi</span>
-            </label>
+        {/* Lightbox Pop-up Foto */}
+        {selectedImage && (
+          <div 
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black bg-opacity-90 p-4"
+            onClick={() => setSelectedImage(null)}
+          >
+            <div className="relative max-w-5xl max-h-[90vh]">
+              <button 
+                onClick={() => setSelectedImage(null)}
+                className="absolute -top-12 right-0 text-white text-4xl font-bold hover:text-gray-300"
+              >
+                &times;
+              </button>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img 
+                src={selectedImage} 
+                alt="Foto Diperbesar" 
+                className="w-full h-auto max-h-[85vh] object-contain rounded-lg shadow-2xl"
+                onClick={(e) => e.stopPropagation()}
+              />
+            </div>
           </div>
-        </div>
-
-        {loading ? (
-          <div className="w-full h-[70vh] bg-gray-200 animate-pulse rounded-xl flex items-center justify-center font-bold text-gray-500">
-            Memuat Data Spasial...
-          </div>
-        ) : (
-          <MapAdminDashboard 
-            laporan={laporan}
-            landmarks={landmarks}
-            filters={filters}
-            onAksi={handleAksi}
-            isAdding={isAdding}
-            onAddingPositionChange={(lat, lng) => {
-              setAddingLat(lat);
-              setAddingLng(lng);
-            }}
-            onImageClick={(url) => setSelectedImage(url)}
-          />
         )}
 
-        {/* Kontrol Tambah Data (Floating Bottom) */}
-        <div className="absolute bottom-6 left-0 right-0 flex justify-center z-[1000] pointer-events-none">
+        {/* Header */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4 bg-white p-6 rounded-2xl shadow-sm border border-green-100">
+          <div>
+            <h1 className="text-3xl font-extrabold mb-2 text-green-800">Admin WebGIS</h1>
+            <p className="text-green-600 font-medium">Map-centric dashboard untuk manajemen spasial yang interaktif.</p>
+          </div>
+          <button 
+            onClick={handleLogout}
+            className="bg-red-50 text-red-600 border border-red-200 px-6 py-2.5 rounded-xl font-bold hover:bg-red-100 transition shadow-sm"
+          >
+            Logout
+          </button>
+        </div>
+        
+        {/* Filter (Di luar peta) */}
+        <div className="bg-white p-5 rounded-2xl shadow-sm border border-green-100 mb-6">
+          <h3 className="font-bold text-green-800 mb-3 text-sm uppercase tracking-wider">Filter Tampilan Peta</h3>
+          <div className="flex flex-wrap gap-4">
+            <label className="flex items-center gap-2 cursor-pointer hover:bg-green-50 p-2.5 rounded-xl transition border border-transparent hover:border-green-100">
+              <input type="checkbox" checked={filters.pending} onChange={() => handleFilterToggle('pending')} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+              <div className="w-3 h-3 bg-red-500 rounded-full shadow-sm"></div>
+              <span className="text-sm font-semibold text-gray-700">Menunggu Validasi</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer hover:bg-green-50 p-2.5 rounded-xl transition border border-transparent hover:border-green-100">
+              <input type="checkbox" checked={filters.approved} onChange={() => handleFilterToggle('approved')} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+              <div className="w-3 h-3 bg-orange-500 rounded-full shadow-sm"></div>
+              <span className="text-sm font-semibold text-gray-700">Aktif (Publik)</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer hover:bg-green-50 p-2.5 rounded-xl transition border border-transparent hover:border-green-100">
+              <input type="checkbox" checked={filters.resolved} onChange={() => handleFilterToggle('resolved')} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+              <div className="w-3 h-3 bg-green-500 rounded-full shadow-sm"></div>
+              <span className="text-sm font-semibold text-gray-700">Dibersihkan</span>
+            </label>
+            <label className="flex items-center gap-2 cursor-pointer hover:bg-green-50 p-2.5 rounded-xl transition border border-transparent hover:border-green-100">
+              <input type="checkbox" checked={filters.landmarks} onChange={() => handleFilterToggle('landmarks')} className="w-4 h-4 text-green-600 rounded focus:ring-green-500" />
+              <div className="w-3 h-3 bg-blue-500 rounded-full shadow-sm"></div>
+              <span className="text-sm font-semibold text-gray-700">Patokan Lokasi</span>
+            </label>
+          </div>
+        </div>
+
+        {/* Container Utama */}
+        <div className="relative shadow-xl rounded-2xl border border-green-200 bg-white p-2 mb-6">
+          {loading ? (
+            <div className="w-full h-[65vh] bg-green-50 animate-pulse rounded-xl flex items-center justify-center font-bold text-green-600">
+              Memuat Data Spasial...
+            </div>
+          ) : (
+            <MapAdminDashboard 
+              laporan={laporan}
+              landmarks={landmarks}
+              filters={filters}
+              onAksi={handleAksi}
+              isAdding={isAdding}
+              onAddingPositionChange={(lat, lng) => {
+                setAddingLat(lat);
+                setAddingLng(lng);
+              }}
+              onImageClick={(url) => setSelectedImage(url)}
+            />
+          )}
+        </div>
+
+        {/* Kontrol Tambah Data (Di luar peta agar tidak lompat-lompat) */}
+        <div className="flex justify-center">
           {!isAdding ? (
             <button 
               onClick={() => setIsAdding(true)}
-              className="pointer-events-auto bg-gray-900 text-white px-8 py-3 rounded-full font-bold shadow-[0_0_20px_rgba(0,0,0,0.3)] hover:bg-gray-800 transition flex items-center gap-2 hover:scale-105 active:scale-95"
+              className="bg-green-700 text-white px-8 py-3.5 rounded-full font-bold shadow-[0_4px_20px_rgba(21,128,61,0.3)] hover:bg-green-800 transition flex items-center gap-2 hover:scale-105 active:scale-95"
             >
-              <span className="text-xl">+</span> Tambah Data Baru
+              <span className="text-2xl leading-none">+</span> Tambah Data Baru
             </button>
           ) : (
-            <div className="pointer-events-auto bg-white p-4 rounded-2xl shadow-[0_0_30px_rgba(0,0,0,0.2)] border border-gray-200 flex flex-col items-center animate-bounce">
-              <p className="font-bold text-gray-800 mb-3 text-center">Geser Peta/Pin ke Lokasi yang Tepat</p>
-              <div className="flex gap-3">
+            <div className="bg-white p-6 rounded-2xl shadow-xl border border-green-200 flex flex-col items-center w-full max-w-md animate-in fade-in slide-in-from-bottom-4">
+              <p className="font-bold text-green-800 mb-5 text-center text-lg">Geser Peta/Pin ke Lokasi yang Tepat</p>
+              <div className="flex gap-4 w-full">
                 <button 
                   onClick={handleKonfirmasiPosisi}
-                  className="bg-purple-600 text-white px-6 py-2 rounded-lg font-bold shadow-md hover:bg-purple-700"
+                  className="bg-green-600 text-white px-6 py-3 rounded-xl font-bold shadow-md hover:bg-green-700 flex-1 transition"
                 >
                   Konfirmasi Posisi
                 </button>
                 <button 
                   onClick={() => setIsAdding(false)}
-                  className="bg-gray-200 text-gray-700 px-6 py-2 rounded-lg font-bold hover:bg-gray-300"
+                  className="bg-red-50 text-red-600 border border-red-200 px-6 py-3 rounded-xl font-bold hover:bg-red-100 flex-1 transition"
                 >
                   Batal
                 </button>
@@ -383,7 +384,6 @@ export default function AdminDashboard() {
             </div>
           )}
         </div>
-
       </div>
     </div>
   );
