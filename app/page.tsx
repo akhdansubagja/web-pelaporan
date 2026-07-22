@@ -170,23 +170,23 @@ export default function LandingPage() {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 <div onClick={() => setSelectedImage('/1.jpeg')} className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-1 cursor-pointer">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/1.jpeg" alt="Poster Edukasi" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
-                  <h3 className="font-bold text-gray-800 text-sm text-center">Poster Edukasi</h3>
+                  <img src="/1.jpeg" alt="Kenali Jenis Sampah" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
+                  <h3 className="font-bold text-gray-800 text-sm text-center">Kenali Jenis Sampah</h3>
                 </div>
                 <div onClick={() => setSelectedImage('/2.jpeg')} className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-1 cursor-pointer">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/2.jpeg" alt="Infografis" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
-                  <h3 className="font-bold text-gray-800 text-sm text-center">Infografis</h3>
+                  <img src="/2.jpeg" alt="Penerapan Prinsip 3R" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
+                  <h3 className="font-bold text-gray-800 text-sm text-center">Penerapan Prinsip 3R</h3>
                 </div>
                 <div onClick={() => setSelectedImage('/3.jpeg')} className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-1 cursor-pointer">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/3.jpeg" alt="Video Edukasi" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
-                  <h3 className="font-bold text-gray-800 text-sm text-center">Video Edukasi</h3>
+                  <img src="/3.jpeg" alt="5 Langkah Memilah Sampah" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
+                  <h3 className="font-bold text-gray-800 text-sm text-center">5 Langkah Memilah Sampah</h3>
                 </div>
                 <div onClick={() => setSelectedImage('/4.jpeg')} className="bg-white p-3 rounded-2xl shadow-sm border border-gray-100 hover:shadow-lg transition duration-300 transform hover:-translate-y-1 cursor-pointer">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src="/4.jpeg" alt="Brosur Digital" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
-                  <h3 className="font-bold text-gray-800 text-sm text-center">Brosur Digital</h3>
+                  <img src="/4.jpeg" alt="Dampak Sampah Terhadap Lingkungan" className="w-full h-32 md:h-48 object-cover rounded-xl mb-3" />
+                  <h3 className="font-bold text-gray-800 text-sm text-center">Dampak Sampah Terhadap Lingkungan</h3>
                 </div>
               </div>
             </div>
